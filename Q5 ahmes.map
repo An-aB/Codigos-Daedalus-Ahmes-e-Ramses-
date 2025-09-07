@@ -1,0 +1,12 @@
+Símbolo         Valor Decimal   Valor Hexadecimal
+-------         -------------   -----------------
+NUMERO_BYTE               150                  96
+RESULTADO_C2_BYTE         151                  97
+RESULTADO_SM_BYTE         152                  98
+MASCARA_SINAL             153                  99
+VALOR_ZERO                154                  9A
+NUMERO_PALAVRA            155                  9B
+RESULTADO_C2_PALAVRA      157                  9D
+RESULTADO_SM_PALAVRA      159                  9F
+MASCARA_SINAL_PALAVRA      161                  A1
+INICIO_PROGRAMA             0                   0

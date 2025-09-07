@@ -1,0 +1,42 @@
+; Dados do Programa
+; Aloca as variaveis em um endereco, a partir de 150
+org 150
+
+NUMERO_BYTE:          DB      3
+RESULTADO_C2_BYTE:    DB      0
+RESULTADO_SM_BYTE:    DB      0
+MASCARA_SINAL:        DB      128
+VALOR_ZERO:           DB      0
+
+; Dados para a palavra (DW)
+NUMERO_PALAVRA:       DW      3
+RESULTADO_C2_PALAVRA: DW      0
+RESULTADO_SM_PALAVRA: DW      0
+MASCARA_SINAL_PALAVRA:DW      32768
+
+org 0
+
+INICIO_PROGRAMA:
+    ; --- Conversao para Byte (DB) ---
+    ; Complemento de dois
+    LDA     VALOR_ZERO              
+    SUB     NUMERO_BYTE            
+    STA     RESULTADO_C2_BYTE       
+
+    ; Sinal-magnitude
+    LDA     NUMERO_BYTE             ; Carrega 10 no acumulador
+    ADD     MASCARA_SINAL           ; Acumulador = 10 + 128, que e -10 em sinal-magnitude
+    STA     RESULTADO_SM_BYTE       ; Salva o resultado no endereco RESULTADO_SM_BYTE
+
+    ; --- Conversao para Palavra (DW) ---
+    ; Complemento de dois
+    LDA     VALOR_ZERO             
+    SUB     NUMERO_PALAVRA          
+    STA     RESULTADO_C2_PALAVRA    
+
+    ; Sinal-magnitude
+    LDA     NUMERO_PALAVRA          ; Carrega 20 no acumulador
+    ADD     MASCARA_SINAL_PALAVRA   ; Acumulador = 20 + 32768, que e -20 em sinal-magnitude
+    STA     RESULTADO_SM_PALAVRA    ; Salva o resultado no endereco RESULTADO_SM_PALAVRA
+
+    HLT                             ; Finaliza a execucao

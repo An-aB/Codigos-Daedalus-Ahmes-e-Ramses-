@@ -1,0 +1,61 @@
+org 128
+
+; ---------- Variáveis de 8 bits ----------
+VALOR1_8:   DB  150       ; Primeiro número
+VALOR2_8:   DB  150      ; Segundo número
+RESUL_8:    DB  0         
+FLAG_8:     DB  0         
+
+; ---------- Variáveis de 16 bits ----------
+VALOR1_16:  DW  35000     
+VALOR2_16:  DW  35000   
+RESUL_16:   DW  0         
+FLAG_16:    DB  0         
+
+; ---------- Constantes ----------
+LIMITE8:    DB  255       
+ZERO:       DB  0        
+FF:         DB  255      
+
+org 0
+
+INICIO:
+        ; ========== SOMA DE 8 BITS ==========
+        LDR A, VALOR1_8         
+        ADD A, VALOR2_8         
+        STR A, RESUL_8          
+
+        ; Checa se houve overflow (A > 255)
+        SUB A, LIMITE8
+        JN  NO_OVF8             ; Se resultado <= 255 ? não houve overflow
+        LDR A, FF
+        STR A, FLAG_8           ; Marca overflow
+        JMP SOMA16
+NO_OVF8:
+        LDR A, ZERO
+        STR A, FLAG_8           ; Marca sem overflow
+
+        ; ========== SOMA DE 16 BITS ==========
+SOMA16:
+        ; Soma parte baixa
+        LDR A, VALOR1_16        ; Carrega parte baixa de VALOR1_16
+        ADD A, VALOR2_16        ; Soma parte baixa de VALOR2_16
+        STR A, RESUL_16         ; Salva parte baixa em RESUL_16
+
+        ; Soma parte alta
+        LDR A, VALOR1_16+1      ; Carrega parte alta de VALOR1_16
+        ADD A, VALOR2_16+1      ; Soma parte alta de VALOR2_16
+        STR A, RESUL_16+1       ; Salva parte alta em RESUL_16+1
+
+        ; Verifica overflow de 16 bits (se resultado > 65535)
+        ; Para simplificar: se parte alta passou de 255 ? overflow
+        SUB A, LIMITE8
+        JN  NO_OVF16
+        LDR A, FF
+        STR A, FLAG_16
+        JMP FIM
+NO_OVF16:
+        LDR A, ZERO
+        STR A, FLAG_16
+
+FIM:    HLT

@@ -1,0 +1,18 @@
+Símbolo         Valor Decimal   Valor Hexadecimal
+-------         -------------   -----------------
+VALOR1_8                  128                  80
+VALOR2_8                  129                  81
+RESUL_8                   130                  82
+FLAG_8                    131                  83
+VALOR1_16                 132                  84
+VALOR2_16                 134                  86
+RESUL_16                  136                  88
+FLAG_16                   138                  8A
+LIMITE8                   139                  8B
+ZERO                      140                  8C
+FF                        141                  8D
+INICIO                      0                   0
+NO_OVF8                    16                  10
+SOMA16                     20                  14
+NO_OVF16                   42                  2A
+FIM                        46                  2E
