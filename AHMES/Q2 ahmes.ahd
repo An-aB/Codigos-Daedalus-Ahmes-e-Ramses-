@@ -24,7 +24,7 @@ COMECO:
 	LDA	n1
 	ADD	n2
 	STA	SOMA8
-	JNC	naoOVER8	;Se houve over, ent„o continua
+	JNC	naoOVER8	;Se houve over, ent√£o continua
 	LDA	FFH
 	STA	over8
 	JMP	MEIO
