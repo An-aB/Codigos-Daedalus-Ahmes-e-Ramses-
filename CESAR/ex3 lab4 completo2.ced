@@ -1,0 +1,59 @@
+ISOLAR:
+; ENTRADA: R0 = valor, R1 = posiçao (0-15)
+; SAÍDA: R0 = valor isolado (0 ou 2^n)
+ISOLAR_BIT:
+	MOV #1, R2
+	MOV R1, R3
+LACO_ISOLAR:
+	BEQ FIM_ISOLAR
+	ASL R2
+	DEC R3
+	BR LACO_ISOLAR
+FIM_ISOLAR:
+	AND R2, R0
+	RTS R7
+
+ZERAR:
+; ENTRADA: R0 = valor, R1 = posiçao (0-15)
+; SAÍDA: R0= valor zerado
+ZERAR_BIT:
+	MOV #1, R2
+	MOV R1, R3
+LACO_ZERAR:
+	BEQ FIM_ZERAR
+	ASL R2
+	DEC R3
+	BR LACO_ZERAR
+FIM_ZERAR:
+	NOT R2
+	AND R2, R0
+	RTS R7
+
+LIGAR:
+; ENTRADA: R0 = valor, R1 = posiçao (0-15)
+; SAÍDA: R0 = valor ligado
+LIGAR_BIT:
+	MOV #1, R2
+	MOV R1, R3
+LACO_LIGAR:
+	BEQ FIM_LIGAR
+	ASL R2
+	DEC R3
+	BR LACO_LIGAR
+FIM_LIGAR:
+	OR R2, R0
+	RTS R7
+
+CONTAR:
+; ENTRADA: R0 = valor que deve ser verificado
+; SAÍDA: bits ligados
+CONTAR_BITS:
+	CLR R1
+	MOV #16, R2
+LACO_CONTAR:
+	ASR R0
+	BCC PROXIMO_BIT
+	INC R1
+PROXIMO_BIT:
+	SOB R2, LACO_CONTAR
+	RTS R7
