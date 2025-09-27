@@ -1,0 +1,42 @@
+; Declaracao de Dados
+
+org 150
+
+VALOR_BYTE:      DB      4      
+RESULT_C2_BYTE:  DB      0        
+RESULT_SM_BYTE:  DB      0        
+MASCARA_BYTE:    DB      128       
+
+; Dados para uma Palavra (DW)
+VALOR_PALAVRA:   DW      4       
+RESULT_C2_PAL:   DW      0        
+RESULT_SM_PAL:   DW      0      
+MASCARA_PALAVRA: DW      32768    
+
+; ---
+
+; Ponto de Inicio do Programa
+org 0
+
+INICIO:
+    ; --- Conversao do Byte: Complemento de Dois ---
+    LDR     A       #0               
+    SUB     A       VALOR_BYTE      
+    STR     A       RESULT_C2_BYTE   
+
+    ; --- Conversao do Byte: Sinal-Magnitude
+    LDR     A       VALOR_BYTE     
+    ADD     A       MASCARA_BYTE     
+    STR     A       RESULT_SM_BYTE  
+
+    ; --- Conversao da Palavra: Complemento de Dois ---
+    LDR     A       #0               
+    SUB     A       VALOR_PALAVRA    
+    STR     A       RESULT_C2_PAL    
+
+    ; --- Conversao da Palavra: Sinal-Magnitude ---
+    LDR     A       VALOR_PALAVRA    
+    ADD     A       MASCARA_PALAVRA 
+    STR     A       RESULT_SM_PAL    
+
+    HLT                              ; Finaliza o programa
